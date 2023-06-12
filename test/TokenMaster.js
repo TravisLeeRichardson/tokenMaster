@@ -23,15 +23,15 @@ describe("TokenMaster", () => {
     tokenMaster = await TokenMaster.deploy(NAME, SYMBOL)
 
     const transaction = await tokenMaster.connect(deployer).list(
-      OCCASION_NAME,
-      OCCASION_COST,
-      OCCASION_MAX_TICKETS,
-      OCCASION_DATE,
-      OCCASION_TIME,
-      OCCASION_LOCATION
+        OCCASION_NAME,
+        OCCASION_COST,
+        OCCASION_MAX_TICKETS,
+        OCCASION_DATE,
+        OCCASION_TIME,
+        OCCASION_LOCATION
     )
 
-    await transaction.wait()
+    await transaction.wait() //wait until included in a block before running tests.
   })
 
   describe("Deployment", () => {
@@ -69,10 +69,10 @@ describe("TokenMaster", () => {
   describe("Minting", () => {
     const ID = 1
     const SEAT = 50
-    const AMOUNT = ethers.utils.parseUnits('1', 'ether')
+    const AMOUNT = ethers.utils.parseUnits('1', 'ether') //cost of ticket.
 
     beforeEach(async () => {
-      const transaction = await tokenMaster.connect(buyer).mint(ID, SEAT, { value: AMOUNT })
+      const transaction = await tokenMaster.connect(buyer).mint(ID, SEAT, { value: AMOUNT })//connect to buyers wallet and mint one ticket. pass metadata with curly brackets.
       await transaction.wait()
     })
 
